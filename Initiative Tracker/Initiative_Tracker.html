@@ -12,7 +12,7 @@
            the background color and font we use */
         body{
             font-family: 'Trebuchet MS', sans-serif;
-            background-color: rgb(255, 255, 255);
+            background-color: rgb(207, 198, 171);
             text-align: center;
             padding: 100px;
         }
@@ -23,14 +23,20 @@
         }
         
         .container {
-            max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
             padding: 2rem;
+            overflow:auto;
+        }
+
+        .container div{
+            width:33%;
+            float:left;
         }
 
         form {
-            background-color: rgb(177, 177, 178);
-            padding: 100px;
+            background-color: rgb(236, 229, 207);
+            padding: 50px;
             border-radius: 20px;
             box-shadow: 0 0 10px rgb(0, 0, 0);
             display: inline-table;
@@ -52,14 +58,80 @@
             cursor: pointer;
         }
 
+        /* The color the button changes to when hovered over */
         button:hover {
             background-color: #555;
+        }
+        
+        /* opens up a text box for user input, where name of characters, enemies and conditions will be */
+        input[type="text"] {
+            width: 100%
+            padding 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #000000;
+            border-radius: 4px;
+        }
+
+        /* where the initiative, AC, and HP will be */
+        input[type="number"]{
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #000000;
+            border-radius: 4px;
         }
 
     </style>
 
-    
-
-
-
 </head>
+
+<body>
+    <h1>Reid's Initiative Tracker</h1>
+    <div>
+        <form id="initiativeForm">
+            <label for="Initiative"> Initiative: </label>
+            <input type:"number" id="Initiative" name="Initiative" maxlength="4" size="4" autofocus>
+            <label for="Name"> Name: </label>
+            <input type:"text"  id="Name" name="Name">
+            <label for="HP"> HP: </label>
+            <input type:"number" id="HP" name="HP" maxlength="3" size="3" autofocus>
+            <label for="AC"> AC: </label>
+            <input type:"number" id="AC" name="AC" maxlength="3" size="3" autofocus>
+
+        </form>
+    </div>
+    <button type="button" onclick="addInput()">+</button>
+    <button type="button" onclick="removeInput()">-</button>
+    <script>
+        function addInput() {
+            // Create a new div to hold the new set of inputs
+            const newEntry = document.createElement('div');
+            newEntry.className = 'entry';
+
+            // Add the new inputs to the div
+            newEntry.innerHTML = `
+                <label for="Initiative">Initiative: </label>
+                <input type:"number" id="Initiative" name="Initiative" maxlength="4" size="4" autofocus>
+                <label for="Name">Name: </label>
+                <input type:"text"  id="Name" name="Name">
+                <label for="HP"> HP: </label>
+                <input type:"number" id="HP" name="HP" maxlength="3" size="3" autofocus>
+                <label for="AC"> AC: </label>
+                <input type:"number" id="AC" name="AC" maxlength="3" size="3" autofocus>
+            `;
+
+            // Append the new div to the form
+            document.getElementById('initiativeForm').appendChild(newEntry);
+        }
+        
+        function removeInput(button) {
+            const form = document.getElementById('initiativeForm');
+            const entries = form.getElementsByClassName('entry');
+
+            // Only remove an entry if there are any left
+            if (entries.length > 0) {
+                form.removeChild(entries[entries.length - 1]);
+            }
+        }
+    </script>
+</body>
