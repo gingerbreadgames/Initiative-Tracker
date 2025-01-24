@@ -11,21 +11,25 @@
 </head>
 
 <body>
+    
     <h1>Reid's Initiative Tracker</h1>
-    <div>
+    <div class = initiative>
         <form id="initiativeForm">
-            <label for="Initiative"> Initiative: </label>
-            <input type:"number" id="Initiative" name="Initiative" maxlength="4" size="4" autofocus>
-            <label for="Name"> Name: </label>
-            <input type:"text"  id="Name" name="Name">
-            <label for="HP"> HP: </label>
-            <input type:"number" id="HP" name="HP" maxlength="3" size="3" autofocus>
-            <label for="AC"> AC: </label>
-            <input type:"number" id="AC" name="AC" maxlength="3" size="3" autofocus>
-
+            <script>
+                window.onload = function() {
+                    startInput();
+                    startInput();
+                    startInput();
+                }
+                </script>
         </form>
     </div>
+    
+    
     <button type="button" onclick="addInput()">+</button>
     <button type="button" onclick="removeInput()">-</button>
-    <script src="..\Static/js/App.js"></script>
+    <button type="button" onclick="sortInitiative()">Sort</button>
+
+    <script src="../Static/js/App.js"></script>
 </body>
+</html>

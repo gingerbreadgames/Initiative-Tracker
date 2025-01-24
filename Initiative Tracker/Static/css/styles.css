@@ -69,3 +69,11 @@ input[type="number"] {
     border: 1px solid #000000;
     border-radius: 4px;
 }
+
+input[type="checkbox"]{
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+    transform: scale(1.2); /* Adjust size */
+    cursor: pointer;
+
+}
