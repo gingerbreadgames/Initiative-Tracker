@@ -1,52 +1,48 @@
 const numberInput = document.getElementById('Initiative');
-
-// Function to add a new set of 
-function startInput() {
-    // Create a new div to hold the new set of inputs
-    const newEntry = document.createElement('div');
-    newEntry.className = 'initiative';
-
-    // Add the new inputs to the div
-    newEntry.innerHTML = `
-            <label for="Initiative"> Initiative: </label>
-            <input type:"number" id="Initiative" name="Initiative" maxlength="4" size="4" autofocus>
-            <label for="Name"> Name: </label>
-            <input type:"text"  id="Name" name="Name">
-            <label for="HP"> HP: </label>
-            <input type:"number" id="HP" name="HP" maxlength="3" size="3" autofocus>
-            <label for="AC"> AC: </label>
-            <input type:"number" id="AC" name="AC" maxlength="3" size="3" autofocus>
-            <label for="isDead"> Dead? </label>
-            <input type="checkbox" id="isDead" name="isDead">
-    `;
-
-    // Append the new div to the form
-    document.getElementById('initiativeForm').appendChild(newEntry);
-}
+let counter = 0;
+// on button click this will add another line of inputs 
 function addInput() {
     // Create a new div to hold the new set of inputs
     const newEntry = document.createElement('div');
     newEntry.className = 'initiative';
 
+    counter++;
+    newEntry.className = 'initiative';
+    newEntry.id = `entry-${counter}`;
+
     // Add the new inputs to the div
     newEntry.innerHTML = `
-            <label for="Initiative"> Initiative: </label>
-            <input type:"number" id="Initiative" name="Initiative" maxlength="4" size="4" autofocus>
-            <label for="Name"> Name: </label>
-            <input type:"text"  id="Name" name="Name">
-            <label for="HP"> HP: </label>
-            <input type:"number" id="HP" name="HP" maxlength="3" size="3" autofocus>
-            <label for="AC"> AC: </label>
-            <input type:"number" id="AC" name="AC" maxlength="3" size="3" autofocus>
+            <button type="button" onclick="assignValue(${counter})">roll</button>
+            <label for="Initiative-${counter}"> Initiative: </label>
+            <input type:"number" id="Initiative-${counter}" name="Initiative" maxlength="4" size="4" autofocus>
+            <label for="Name-${counter}"> Name: </label>
+            <input type:"text"  id="Name-${counter}" name="Name">
+            <label for="HP-${counter}"> HP: </label>
+            <input type:"number" id="HP-${counter}" name="HP" maxlength="4" size="4" autofocus>
+            <label for="AC-${counter}"> AC: </label>
+            <input type:"number" id="AC-${counter}" name="AC" maxlength="4" size="4" autofocus>
             <label for="isDead"> Dead? </label>
             <input type="checkbox" id="isDead" name="isDead">
+            <button type="button" color=red onclick="removeInput(this)">X</button>
     `;
-
+  // event listener to the Dead checkbox
+  const checkbox = newEntry.querySelector('input[name="isDead"]');
+  checkbox.addEventListener('change', function () {
+      markDead(this);
+  });
+    
     // Append the new div to the form
     document.getElementById('initiativeForm').appendChild(newEntry);
 }
 
-// Function to remove the last set of inputs
+// start the website with the input areas ready to go
+function startInput() {
+    addInput();
+    addInput();
+    addInput();
+}
+
+// Function to remove set of inputs
 function removeInput() {
     const form = document.getElementById('initiativeForm');
     const entries = form.getElementsByClassName('initiative');
@@ -57,7 +53,6 @@ function removeInput() {
     }
 }
 
-const numbers = [1, 5, 3, 4];
 // Function to sort all elements by highest initiative #
 function sortInitiative() {
     const form = document.getElementById('initiativeForm');
@@ -73,40 +68,74 @@ function sortInitiative() {
 
     entries.forEach(entry => form.appendChild(entry));
 }
-    function markDead() {
-        const checkbox = document.getElementById('isDead');
 
-        checkbox.addEventListener('change', function () {
-            if (this.checked) {
-                document.getElementById("Initiative").disabled = true;
-                document.getElementById("Name").disabled = true;
-                document.getElementById("HP").disabled = true;
-                document.getElementById("AC").disabled = true;
-            }
+// on check mark it tones down opacity and removes input functionality except the checkbox that denotes if creature is dead
+function markDead(checkbox) {
+    const entry = checkbox.closest('.initiative');
+    if (checkbox.checked) {
+        // Disable all inputs within the entry, except for the checkbox itself
+        entry.querySelectorAll('input').forEach(input => {
+            if (input !== checkbox) input.disabled = true;
         });
+
+        // Lower the opacity for the entry
+        entry.style.opacity = '0.5';
+    } else {
+        // Re-enable all inputs within the entry
+        entry.querySelectorAll('input').forEach(input => {
+            input.disabled = false;
+        });
+
+        // Reset opacity for the entry
+        entry.style.opacity = '1';
+    }
 }
 
-    function whoseTurn() {
+function startCombat() {
     
-    }
+}
 
-    function roundCounter() {
+function endCombat() {
     
-    }
+}
 
-    function nextUp() {
+function whoseTurn() {
     
-    }
+}
 
-    function roll() {
+function roundCounter() {
     
+}
+
+function nextUp() {
+    // if isDead skip turn
+}
+
+
+
+
+var rolledNumber;
+// creates a random number 1 through 20 for initiative laziness 
+function roll() {
+    rolledNumber = Math.floor(Math.random() * 20) + 1;
+    return rolledNumber;
+
+}
+
+// assigns the random roll int into the initiative input
+function assignValue(entryId) {
+    const rolledNumber = roll();
+    const inputField = document.getElementById(`Initiative-${entryId}`);
+    if (inputField) {
+        inputField.value = rolledNumber;
     }
+}
+
 /* 
 more ideas to work on 
--mark enemy as dead and remove their line
+-remove character lines
 -highlight player up for combat
 -round counter
 -next button for player combat
--Conditions tracker
--roll option
+-Conditions tracker that slightly colors the person of the affect
 */

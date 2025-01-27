@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--seems to be standard for html besides title-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reid's Initiative Tracker</title>
+
+    <link rel="stylesheet" href="Static/css/styles.css">
+
+</head>
+
+<body>
+    
+    <h1>Reid's Initiative Tracker</h1>
+    <div class = initiative>
+        <form id="initiativeForm">
+            <script>
+                window.onload = function() {
+                    startInput();
+                }
+            </script>
+        </form>
+        
+    </div>
+    
+    
+    <button type="button" onclick="addInput()">+</button>
+    <button type="button" onclick="removeInput()">-</button>
+    <button type="button" onclick="sortInitiative()">Sort</button>
+
+    <script src="Static/js/App.js"></script>
+</body>
+</html>
