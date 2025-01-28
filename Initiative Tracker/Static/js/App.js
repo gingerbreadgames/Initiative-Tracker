@@ -1,5 +1,11 @@
 const numberInput = document.getElementById('Initiative');
-let counter = 0;
+let counter = 0; // counter to make unique Id's for inputs
+let roundNumber = 1; // when combat begins it begins at round 1
+let inCombat = false; // website starts with combat tracking off
+let myTurn = false; 
+var rolledNumber;
+
+
 // on button click this will add another line of inputs 
 function addInput() {
     // Create a new div to hold the new set of inputs
@@ -43,13 +49,10 @@ function startInput() {
 }
 
 // Function to remove set of inputs
-function removeInput() {
-    const form = document.getElementById('initiativeForm');
-    const entries = form.getElementsByClassName('initiative');
-
-    // Only remove an entry if there are any left
-    if (entries.length > 0) {
-        form.removeChild(entries[entries.length - 1]);
+function removeInput(button) {
+    const entry = button.closest('.initiative'); // Find the closest parent with the class 'initiative'
+    if (entry) {
+        entry.remove(); // Remove the specific entry
     }
 }
 
@@ -92,29 +95,53 @@ function markDead(checkbox) {
 }
 
 function startCombat() {
+    inCombat = true;
     
 }
 
 function endCombat() {
-    
+    inCombat = false;
+
 }
 
 function whoseTurn() {
+    while (inCombat=true){
+        // need to be able to tell who is the highest initiative and next and next and determine that their turn is up
+
+    }
     
+}
+
+function nextTurn() {
+
+    while (inCombat = true) {
+        // find whose turn it is with the whose turn function
+
+
+        if (isDead = true) {
+            // if isDead skip turn
+
+        }
+    }
+}
+
+function lastTurn() {
+    while (inCombat=true){
+        // go back to the last turn
+
+        
+        if (isDead = true) {
+            // if isDead skip turn
+
+        }
+    }
 }
 
 function roundCounter() {
-    
+    roundNumber++;
+
 }
 
-function nextUp() {
-    // if isDead skip turn
-}
-
-
-
-
-var rolledNumber;
 // creates a random number 1 through 20 for initiative laziness 
 function roll() {
     rolledNumber = Math.floor(Math.random() * 20) + 1;
