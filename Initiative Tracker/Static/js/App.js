@@ -4,6 +4,7 @@ let roundNumber = 1; // when combat begins it begins at round 1
 let inCombat = false; // website starts with combat tracking off
 let myTurn = false; 
 var rolledNumber;
+let turnIndex = 1;
 
 
 // on button click this will add another line of inputs 
@@ -31,6 +32,7 @@ function addInput() {
             <input type="checkbox" id="isDead" name="isDead">
             <button type="button" color=red onclick="removeInput(this)">X</button>
     `;
+
   // event listener to the Dead checkbox
   const checkbox = newEntry.querySelector('input[name="isDead"]');
   checkbox.addEventListener('change', function () {
@@ -96,7 +98,7 @@ function markDead(checkbox) {
 
 function startCombat() {
     inCombat = true;
-    
+    whoseTurn();
 }
 
 function endCombat() {
@@ -105,42 +107,53 @@ function endCombat() {
 }
 
 function whoseTurn() {
-    while (inCombat=true){
-        // need to be able to tell who is the highest initiative and next and next and determine that their turn is up
+    const entries = Array.from(document.querySelectorAll('.initiative'));
 
+    // Remove the 'current-turn' highlight from all
+    entries.forEach(entry => entry.classList.remove('current-turn'));
+
+    // Highlight the current turn
+    if (entries[turnIndex]) {
+        entries[turnIndex].classList.add('current-turn');
     }
     
+
 }
 
 function nextTurn() {
+    if (!inCombat) return; // Stop if combat is not active
 
-    while (inCombat = true) {
-        // find whose turn it is with the whose turn function
+    const entries = Array.from(document.querySelectorAll('.initiative'));
 
-
-        if (isDead = true) {
-            // if isDead skip turn
-
+    // Move to the next turn, wrapping around if needed
+    do {
+        turnIndex = (turnIndex + 1) % entries.length;
+        if (turnIndex === 0) {
+            turnIndex = turnIndex + 1; 
         }
-    }
+    } while (entries[turnIndex].querySelector('input[name="isDead"]').checked); // Skip dead characters
+
+    whoseTurn(); // Update UI to show current turn
 }
+
 
 function lastTurn() {
-    while (inCombat=true){
-        // go back to the last turn
+    if (!inCombat) return; // Stop if combat is not active
 
-        
-        if (isDead = true) {
-            // if isDead skip turn
+    const entries = Array.from(document.querySelectorAll('.initiative'));
 
+    // Move to the previous turn, wrapping around if needed
+    do {
+        turnIndex = (turnIndex - 1 + entries.length) % entries.length;
+        if (turnIndex === 0) {
+            turnIndex = turnIndex - 1 + entries.length; 
         }
-    }
-}
+    } while (entries[turnIndex].querySelector('input[name="isDead"]').checked); // Skip dead characters
 
-function roundCounter() {
-    roundNumber++;
+    whoseTurn(); // Update UI to show current turn
 
 }
+
 
 // creates a random number 1 through 20 for initiative laziness 
 function roll() {
@@ -160,9 +173,5 @@ function assignValue(entryId) {
 
 /* 
 more ideas to work on 
--remove character lines
--highlight player up for combat
--round counter
--next button for player combat
 -Conditions tracker that slightly colors the person of the affect
 */
