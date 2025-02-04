@@ -1,20 +1,23 @@
 /* is the basis for our website, center text aligning the background color and font we use */
 body {
-    font-family: 'Trebuchet MS', sans-serif;
+    font-family: 'Garamond', serif;
     background-color: rgb(207, 198, 171);
     text-align: center;
     padding: 100px;
+    color: #2E1A11;
 }
 
 /* is the number by the initiative order */  
 h1 {
-    color: black;
+    color: #5A3825;
+    font-size: 2.5rem;
 }
 
 .container {
     width: 100%;
     margin: 0 auto;
     padding: 2rem;
+    background: rgba(236, 229, 207, 0.9);
     overflow: auto;
 }
 
@@ -24,7 +27,7 @@ h1 {
 }
 
 form {
-    background-color: rgb(236, 229, 207);
+    background-color: rgba(255, 245, 230, 0.95);
     padding: 50px;
     border-radius: 20px;
     box-shadow: 0 0 10px rgb(0, 0, 0);
@@ -34,12 +37,13 @@ form {
 
 /* this will be on our button */
 label {
+    
     font-weight: bold;
 }
 
 /* going to be our addition & Subtraction button to add more sections for initiative */
 button {
-    background-color: #333;
+    background: linear-gradient(180deg, #5A3825, #8B5E3C);
     color: white;
     padding: 10px 20px;
     border: none;
@@ -49,7 +53,7 @@ button {
 
  /* The color the button changes to when hovered over */
 button:hover {
-    background-color: #555;
+    background:linear-gradient(180deg, #8B5E3C, #5A3825);
 }
 
 /* opens up a text box for user input, where name of characters, enemies and conditions will be */
@@ -73,7 +77,7 @@ input[type="number"] {
 input[type="checkbox"]{
     margin-left: 0.5rem;
     margin-bottom: 1rem;
-    transform: scale(1.2); /* Adjust size */
+    transform: scale(1); /* Adjust size */
     cursor: pointer;
 
 }
@@ -82,6 +86,6 @@ input[type="checkbox"]{
     opacity: 0.6;
 }
 .current-turn{
-    background-color: aliceblue;
+    background-color: #D4AF37;
     font-weight: bold;
 }

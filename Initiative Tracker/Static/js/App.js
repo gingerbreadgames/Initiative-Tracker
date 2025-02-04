@@ -103,7 +103,10 @@ function startCombat() {
 
 function endCombat() {
     inCombat = false;
-
+    // Remove the highlight from all entries by removing the "current-turn" class
+    const entries = document.querySelectorAll('.initiative');
+    entries.forEach(entry => entry.classList.remove('current-turn'));
+    
 }
 
 function whoseTurn() {
