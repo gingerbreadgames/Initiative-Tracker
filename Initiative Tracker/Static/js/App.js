@@ -19,7 +19,7 @@ function addInput() {
 
     // Add the new inputs to the div
     newEntry.innerHTML = `
-            <button type="button" onclick="assignValue(${counter})">roll</button>
+            <button type="button" onclick="assignValue(${counter})">Roll</button>
             <label for="Initiative-${counter}"> Initiative: </label>
             <input type:"number" id="Initiative-${counter}" name="Initiative" maxlength="4" size="4" autofocus>
             <label for="Name-${counter}"> Name: </label>
